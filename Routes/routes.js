@@ -4,9 +4,7 @@ const postcontroller = require("../controller/createPostController");
 route.post("/create", (req, res) => {
     const data = req.body;
     console.log(data);
-});
-route.get("/getitems", (req, res) => {
-    res.send("in /getitems route");
+    postcontroller(data);
 });
 
 module.exports = route;
