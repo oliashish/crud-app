@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const route = require("./Routes/routes");
 const bodyParser = require("body-parser");
-const db = require("./Model/Database");
+const myTable = require("./models/myDatabase");
 
 const PORT = 5000;
 
