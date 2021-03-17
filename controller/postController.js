@@ -2,14 +2,16 @@ const PostModel = require("../models/postModel");
 
 const Create = (req) => {
     const data = req.body;
-    PostModel.Post_Model(data);
+    PostModel.Create(data);
 };
 
-const Get = (req, res) => {
-    PostModel.Get_Model(req, res);
-}
+const Get = function (req, res) {
+    PostModel.Get(function (err, result) {
+        res.send(result);
+    });
+};
 
 module.exports = {
-    Post_Controller,
-    Get_Controller,
+    Create,
+    Get,
 };
