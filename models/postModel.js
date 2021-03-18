@@ -1,3 +1,4 @@
+const { response } = require("express");
 const myTable = require("./myDatabase");
 
 const Create = (data) => {
@@ -16,12 +17,13 @@ const Create = (data) => {
 };
 
 const Get = function (result) {
-    myTable.query("SELECT * FROM myTable", function (err, res)  {
+    myTable.query("SELECT * FROM myTable", function (err, response)  {
         if (err) {
             console.log(err);
 
         } else {
-            result(null, res);
+            data = JSON.stringify(response);
+            result(null, data);
         }
     });
 };

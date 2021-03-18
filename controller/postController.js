@@ -5,7 +5,7 @@ const Create = (req) => {
     PostModel.Create(data);
 };
 
-const Get = function (req, res) {
+const Get = (req, res) => {
     PostModel.Get(function (err, result) {
         res.send(result);
     });

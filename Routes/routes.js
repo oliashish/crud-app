@@ -10,7 +10,8 @@ route.post("/posts", (req, res) => {
     PostController.Create(req);
 });
 route.get("/posts", (req, res) => {
-    PostController.Get(req, res);
+    const data = PostController.Get(req, res);
+    console.log(data);
 });
 
 module.exports = route;
