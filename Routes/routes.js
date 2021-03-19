@@ -10,8 +10,12 @@ route.post("/posts", (req, res) => {
     PostController.Create(req);
 });
 route.get("/posts", (req, res) => {
-    const data = PostController.Get(req, res);
-    console.log(data);
+    PostController.Get(id, res);
+});
+route.get("/posts/:id", (req, res) => {
+    const id = req.params.id;
+    console.log("is id : ", id);
+    PostController.Get(id, res);
 });
 
 module.exports = route;

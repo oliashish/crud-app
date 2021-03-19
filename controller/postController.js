@@ -5,10 +5,16 @@ const Create = (req) => {
     PostModel.Create(data);
 };
 
-const Get = (req, res) => {
-    PostModel.Get(function (err, result) {
-        res.send(result);
-    });
+const Get = (id, res) => {
+    if (id) {
+        PostModel.Get(id, function (err, result) {
+            res.send(result);
+        });
+    } else {
+        PostModel.Get(function (err, result) {
+            res.send(result);
+        });
+    }
 };
 
 module.exports = {
