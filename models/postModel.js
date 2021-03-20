@@ -1,7 +1,13 @@
+const e = require("express");
 const { query } = require("./myDatabase");
 const myTable = require("./myDatabase");
 
 const Create = (data) => {
+    console.log(data);
+    const title = data.title;
+    const description = data.description;
+    const country = data.country;
+    const created_on = data.created_on;
     myTable.query(
         "INSERT INTO myTable (title, description, created_on, country) VALUES (?,?,?,?)",
         [title, description, created_on, country],
@@ -15,22 +21,43 @@ const Create = (data) => {
         }
     );
 };
+const Update = function (id, data) {
+    console.log(id, data);
+    const title = data.title;
+    const description = data.description;
+    const country = data.country;
+    const created_on = data.created_on;
 
-const Get = function (id, result) {
-    if (id) {
-        const query = `SELECT * FROM myTable WHERE id=${id}`;
-        myTable.query(query, function (err, res) {
+    myTable.query(
+        `UPDATE myTable SET title=?, description=?, created_on=?, country=? WHERE id=?`,
+        [title, description, created_on, country, id],
+        (err, result) => {
             if (err) {
                 console.log(err);
             } else {
-                const data = JSON.stringify(res);
-                result(null, data);
+                console.log("success ... post updated..", id);
             }
-        });
+        }
+    );
+};
+const Get = function (id, result) {
+    if (id) {
+        myTable.query(
+            "SELECT * FROM myTable WHERE id=?",
+            [id],
+            function (err, res) {
+                if (err) {
+                    result(err, null);
+                } else {
+                    const data = JSON.stringify(res);
+                    result(null, data);
+                }
+            }
+        );
     } else {
         myTable.query("SELECT * FROM myTable", function (err, res) {
             if (err) {
-                console.log(err);
+                result(err, null);
             } else {
                 const data = JSON.stringify(res);
                 result(null, data);
@@ -38,8 +65,19 @@ const Get = function (id, result) {
         });
     }
 };
+const Delete = (id) => {
+    myTable.query("DELETE FROM myTable WHERE id=?", [id], (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(result);
+        }
+    });
+};
 
 module.exports = {
     Create,
     Get,
+    Update,
+    Delete,
 };

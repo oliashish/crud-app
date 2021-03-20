@@ -11,13 +11,22 @@ const Get = (id, res) => {
             res.send(result);
         });
     } else {
-        PostModel.Get(function (err, result) {
+        PostModel.Get(null, function (err, result) {
             res.send(result);
         });
     }
+};
+const Update = (id, data) => {
+    PostModel.Update(id, data);
+};
+
+const Delete = (id) => {
+    PostModel.Delete(id);
 };
 
 module.exports = {
     Create,
     Get,
+    Update,
+    Delete,
 };

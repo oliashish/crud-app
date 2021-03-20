@@ -5,6 +5,7 @@ const myTable = mysql.createConnection({
     host: "127.0.0.1",
     password: "mysql001",
     database: "myLearningSchema",
+    multipleStatements: true,
 });
 
 myTable.connect(function (err) {
