@@ -5,16 +5,15 @@ const Create = (req) => {
     PostModel.Create(data);
 };
 
-const Get = (id, res) => {
-    if (id) {
-        PostModel.Get(id, function (err, result) {
-            res.send(result);
-        });
-    } else {
-        PostModel.Get(null, function (err, result) {
-            res.send(result);
-        });
-    }
+const GetAll = (res) => {
+    PostModel.GetAll(function (err, result) {
+        res.send(result);
+    });
+};
+const GetByID = (id, res) => {
+    PostModel.GetByID(id, function (err, result) {
+        res.send(result);
+    });
 };
 const Update = (id, data) => {
     PostModel.Update(id, data);
@@ -26,7 +25,8 @@ const Delete = (id) => {
 
 module.exports = {
     Create,
-    Get,
+    GetAll,
+    GetByID,
     Update,
     Delete,
 };

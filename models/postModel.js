@@ -40,30 +40,30 @@ const Update = function (id, data) {
         }
     );
 };
-const Get = function (id, result) {
-    if (id) {
-        myTable.query(
-            "SELECT * FROM myTable WHERE id=?",
-            [id],
-            function (err, res) {
-                if (err) {
-                    result(err, null);
-                } else {
-                    const data = JSON.stringify(res);
-                    result(null, data);
-                }
-            }
-        );
-    } else {
-        myTable.query("SELECT * FROM myTable", function (err, res) {
+const GetAll = function (result) {
+    myTable.query("SELECT * FROM myTable", function (err, res) {
+        if (err) {
+            result(err, null);
+        } else {
+            const data = JSON.stringify(res);
+            result(null, data);
+        }
+    });
+};
+
+const GetByID = function (id, result) {
+    myTable.query(
+        "SELECT * FROM myTable WHERE id=?",
+        [id],
+        function (err, res) {
             if (err) {
                 result(err, null);
             } else {
                 const data = JSON.stringify(res);
                 result(null, data);
             }
-        });
-    }
+        }
+    );
 };
 const Delete = (id) => {
     myTable.query("DELETE FROM myTable WHERE id=?", [id], (err, result) => {
@@ -77,7 +77,8 @@ const Delete = (id) => {
 
 module.exports = {
     Create,
-    Get,
+    GetAll,
+    GetByID,
     Update,
     Delete,
 };

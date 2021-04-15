@@ -7,9 +7,9 @@ const myTable = require("./models/myDatabase");
 const PORT = 5000;
 
 const app = new express();
-app.use(express.json());
+app.use(express.json({ extends: true }));
 app.use(cors());
-app.use(bodyParser.json());
+app.use(bodyParser.json({ extends: true }));
 
 app.use("/", route);
 
